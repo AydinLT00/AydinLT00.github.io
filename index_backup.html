@@ -3,293 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aydin's Engineering Portfolio</title>
-    <!-- Importing a modern font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>My Engineering Portfolio</title>
     <style>
-        :root {
-            --bg-color: #0f1115;
-            --card-bg: #1a1d24;
-            --accent: #3b82f6;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-        }
-
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--bg-color); 
-            color: var(--text-main); 
-            margin: 0; 
-            padding: 0; 
-        }
-
-        /* Hero / Header Section */
-        header {
-            text-align: center;
-            padding: 60px 20px 40px;
-            background: linear-gradient(180deg, #161b22 0%, var(--bg-color) 100%);
-            border-bottom: 1px solid #2d3139;
-            margin-bottom: 40px;
-        }
-
-        h1 { 
-            margin: 0; 
-            font-size: 2.5rem; 
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-top: 10px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.5;
-        }
-
-        /* Grid Layout */
+        body { font-family: Arial, sans-serif; background-color: #121212; color: white; margin: 0; padding: 20px; }
+        h1 { text-align: center; margin-bottom: 40px; }
+        
+        /* This creates the Grid layout */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px 60px;
         }
 
-        /* Card Styling */
         .project-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            border: 1px solid #2d3139;
+            background-color: #1e1e1e;
+            border-radius: 10px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: transform 0.2s;
             text-decoration: none;
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
+            color: white;
         }
 
-        .project-card:hover { 
-            transform: translateY(-5px); 
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
-        }
+        .project-card:hover { transform: scale(1.05); }
 
-        /* Media (Video/Image) Setup */
-        .media-container {
-            width: 100%;
-            height: 220px;
-            overflow: hidden;
-            background-color: #000;
-            position: relative;
-        }
-
+        /* Makes videos/GIFs fit perfectly */
         .project-media {
             width: 100%;
-            height: 100%;
-            object-fit: cover; /* Change to 'contain' if you don't want the edges cropped */
-            transition: opacity 0.3s ease;
+            height: 200px;
+            object-fit: cover;
         }
 
-        .project-card:hover .project-media {
-            opacity: 0.9;
-        }
-
-        /* Text & Info Setup */
-        .project-info { 
-            padding: 20px; 
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .project-title { 
-            margin: 0 0 10px 0; 
-            font-size: 1.25rem; 
-            font-weight: 600;
-        }
-
-        .project-desc { 
-            margin: 0 0 15px 0; 
-            font-size: 0.9rem; 
-            color: var(--text-muted); 
-            line-height: 1.5;
-            flex-grow: 1;
-        }
-
-        /* Tech Stack Tags */
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: auto;
-        }
-
-        .tag {
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 20px;
-            background-color: rgba(59, 130, 246, 0.1);
-            color: #60a5fa;
-            font-weight: 600;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-        }
+        .project-info { padding: 15px; }
+        .project-title { margin: 0 0 10px 0; font-size: 1.2em; color: #4DA8DA; }
+        .project-desc { margin: 0; font-size: 0.9em; color: #aaa; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Engineering Projects Showcase</h1>
-        <p class="subtitle">A collection of my work in robotics, control systems, simulation, and hardware design. Click on any card to view the source code.</p>
-    </header>
+    <h1>Project Showcase</h1>
 
     <div class="grid-container">
         
         <!-- Project 1 -->
-        <a href="https://github.com/AydinLT00/Inverted-Pendulum-HIL-Control-SysID/tree/main" class="project-card" target="_blank">
-            <div class="media-container">
-                <video class="project-media" autoplay loop muted playsinline>
-                    <source src="SMC_test_video.mp4" type="video/mp4">
-                </video>
-            </div>
+        <a href="https://github.com/AydinLT00/Inverted-Pendulum-HIL-Control-SysID/tree/main" class="project-card">
+            <!-- PRO TIP: Use autoplaying video instead of GIF for better performance -->
+            <video class="project-media" autoplay loop muted playsinline>
+                <source src="SMC_test_video.mp4" type="video/mp4">
+            </video>
             <div class="project-info">
-                <h2 class="project-title">Inverted Pendulum HIL</h2>
-                <p class="project-desc">Hardware-in-the-Loop (HIL) control and system identification, featuring Sliding Mode Control (SMC) implementation.</p>
-                <div class="tags">
-                    <span class="tag">Control Theory</span>
-                    <span class="tag">MATLAB</span>
-                    <span class="tag">HIL</span>
-                </div>
+                <h2 class="project-title">Inverted Pendulum</h2>
+                <p class="project-desc">LQR control implementation to stabilize a pendulum on a cart.</p>
             </div>
         </a>
 
         <!-- Project 2 -->
-        <a href="https://github.com/AydinLT00/RL-AMS-sorting" class="project-card" target="_blank">
-            <div class="media-container">
-                <img class="project-media" src="animation4.gif" alt="Simulation">
-            </div>
+        <a href="https://github.com/AydinLT00/RL-AMS-sorting" class="project-card">
+            <img class="project-media" src="animation4.gif" alt="Simulation">
             <div class="project-info">
-                <h2 class="project-title">RL-AMS Sorting</h2>
-                <p class="project-desc">Reinforcement Learning applied to Automated Manufacturing Systems for optimized and efficient sorting processes.</p>
-                <div class="tags">
-                    <span class="tag">Reinforcement Learning</span>
-                    <span class="tag">Python</span>
-                </div>
+                <h2 class="project-title">RL-AMS</h2>
+                <p class="project-desc">A* algorithm used for obstacle avoidance.</p>
             </div>
         </a>
 
-        <!-- Project 3 -->
-        <a href="https://github.com/AydinLT00/LLM-Vision-Robotic-Chess-Player" class="project-card" target="_blank">
-            <div class="media-container">
-                <img class="project-media" src="Italian-opening.gif" alt="Simulation">
-            </div>
+        <!-- Project 2 -->
+        <a href="https://github.com/AydinLT00/LLM-Vision-Robotic-Chess-Player" class="project-card">
+            <img class="project-media" src="Italian-opening.gif" alt="Simulation">
             <div class="project-info">
-                <h2 class="project-title">LLM Vision Robotic Chess</h2>
-                <p class="project-desc">Integration of Large Language Models and Computer Vision to automate a robotic arm for playing chess autonomously.</p>
-                <div class="tags">
-                    <span class="tag">LLM</span>
-                    <span class="tag">Computer Vision</span>
-                    <span class="tag">Robotics</span>
-                </div>
+                <h2 class="project-title">LLM-Vision-Robotic-Chess-Player</h2>
+                <p class="project-desc">A* algorithm used for obstacle avoidance.</p>
             </div>
         </a>
 
-        <!-- Project 4 -->
-        <a href="https://github.com/AydinLT00/Soft-Robotic-Gripper" class="project-card" target="_blank">
-            <div class="media-container">
-                <img class="project-media" src="Assem_V02_2.gif" alt="Simulation">
-            </div>
+
+        <!-- Project 2 -->
+        <a href="https://github.com/AydinLT00/Soft-Robotic-Gripper" class="project-card">
+            <img class="project-media" src="Assem_V02_2.gif" alt="Simulation">
             <div class="project-info">
-                <h2 class="project-title">Soft Robotic Gripper CAD</h2>
-                <p class="project-desc">Complete mechanical and CAD design of a pneumatically actuated soft robotic end-effector.</p>
-                <div class="tags">
-                    <span class="tag">CAD</span>
-                    <span class="tag">Mechanical Design</span>
-                </div>
+                <h2 class="project-title">Soft Robotic Gripper CAD design</h2>
+                <p class="project-desc">A* algorithm used for obstacle avoidance.</p>
             </div>
         </a>
 
-        <!-- Project 5 -->
-        <a href="https://github.com/AydinLT00/Soft-Robotic-Gripper" class="project-card" target="_blank">
-            <div class="media-container">
-                <img class="project-media" src="full_demostration.gif" alt="Simulation">
-            </div>
+
+        <!-- Project 2 -->
+        <a href="https://github.com/AydinLT00/Soft-Robotic-Gripper" class="project-card">
+            <img class="project-media" src="full_demostration.gif" alt="Simulation">
             <div class="project-info">
-                <h2 class="project-title">Soft Gripper Demonstration</h2>
-                <p class="project-desc">Physical hardware demonstration and testing of the fabricated soft robotic gripper adapting to various object shapes.</p>
-                <div class="tags">
-                    <span class="tag">Hardware</span>
-                    <span class="tag">Soft Robotics</span>
-                </div>
+                <h2 class="project-title">Soft Robotic Gripper demonstration</h2>
+                <p class="project-desc">A* algorithm used for obstacle avoidance.</p>
             </div>
         </a>
 
-        <!-- Project 6 -->
-        <a href="https://github.com/AydinLT00/IsaacSim_ROS2_HelloWorld" class="project-card" target="_blank">
-            <div class="media-container">
-                <img class="project-media" src="https://github.com/AydinLT00/IsaacSim_ROS2_HelloWorld/releases/download/release_demo/demo.gif" alt="Simulation">
-            </div>
+        <!-- Project 2 -->
+        <a href="https://github.com/AydinLT00/Soft-Robotic-Gripper" class="project-card">
+            <img class="project-media" src="https://github.com/AydinLT00/IsaacSim_ROS2_HelloWorld/releases/download/release_demo/demo.gif" alt="Simulation">
             <div class="project-info">
-                <h2 class="project-title">Custom Rover in Isaac Sim</h2>
-                <p class="project-desc">Custom differential drive rover integrated with LiDAR sensors, simulated in NVIDIA Isaac Sim and visualized in ROS2 RViz.</p>
-                <div class="tags">
-                    <span class="tag">ROS2</span>
-                    <span class="tag">Isaac Sim</span>
-                    <span class="tag">RViz</span>
-                </div>
+                <h2 class="project-title">Custom Rover + Lidar IsaacSim Rviz</h2>
+                <p class="project-desc">A* algorithm used for obstacle avoidance.</p>
             </div>
         </a>
 
-        <!-- Project 7 -->
-        <a href="https://github.com/AydinLT00/MOR-Damage-Propagation-in-U-Bolts" class="project-card" target="_blank">
-            <div class="media-container">
-                <img class="project-media" src="animation.gif" alt="Simulation">
-            </div>
+        <!-- Project 2 -->
+        <a href="https://github.com/AydinLT00/MOR-Damage-Propagation-in-U-Bolts" class="project-card">
+            <img class="project-media" src="animation.gif" alt="Simulation">
             <div class="project-info">
-                <h2 class="project-title">MOR Damage Propagation</h2>
-                <p class="project-desc">Model Order Reduction (MOR) techniques applied to simulate and analyze structural damage propagation in U-Bolts.</p>
-                <div class="tags">
-                    <span class="tag">FEA</span>
-                    <span class="tag">Simulation</span>
-                    <span class="tag">MOR</span>
-                </div>
+                <h2 class="project-title">MOR-Damage-Propagation-in-U-Bolts</h2>
+                <p class="project-desc">A* algorithm used for obstacle avoidance.</p>
             </div>
         </a>
 
-        <!-- Project 8 -->
-        <a href="https://github.com/AydinLT00" class="project-card" target="_blank">
-            <div class="media-container">
-                <video class="project-media" autoplay loop muted playsinline>
-                    <source src="SCARA_Final2.mp4" type="video/mp4">
-                </video>
-            </div>
+        <!-- Project 2 -->
+        <a href="https://github.com/AydinLT00" class="project-card">
+            <video class="project-media" autoplay loop muted playsinline>
+                <source src="SCARA_Final2.mp4" type="video/mp4">
+            </video>
             <div class="project-info">
-                <h2 class="project-title">4DOF SCARA CAD Design</h2>
-                <p class="project-desc">Complete CAD modeling and mechanical assembly mapping for a custom 4-Degrees-of-Freedom SCARA robotic arm.</p>
-                <div class="tags">
-                    <span class="tag">CAD</span>
-                    <span class="tag">Kinematics</span>
-                </div>
+                <h2 class="project-title">Custom 4DOF SCARA CAD Design</h2>
+                <p class="project-desc">A* algorithm used for obstacle avoidance.</p>
             </div>
         </a>
 
-        <!-- Project 9 -->
-        <a href="https://github.com/AydinLT00" class="project-card" target="_blank">
-            <div class="media-container">
-                <video class="project-media" autoplay loop muted playsinline>
-                    <source src="media1.mp4" type="video/mp4">
-                </video>
-            </div>
+        <!-- Project 2 -->
+        <a href="https://github.com/AydinLT00" class="project-card">
+            <video class="project-media" autoplay loop muted playsinline>
+                <source src="media1.mp4" type="video/mp4">
+            </video>
             <div class="project-info">
-                <h2 class="project-title">SCARA Simulink Simulation</h2>
-                <p class="project-desc">Kinematic and dynamic modeling of the custom 4DOF SCARA robot tested within a MATLAB/Simulink environment.</p>
-                <div class="tags">
-                    <span class="tag">MATLAB/Simulink</span>
-                    <span class="tag">Dynamics</span>
-                </div>
+                <h2 class="project-title">Custom 4DOF SCARA CAD Simulink simulation</h2>
+                <p class="project-desc">A* algorithm used for obstacle avoidance.</p>
             </div>
         </a>
 
