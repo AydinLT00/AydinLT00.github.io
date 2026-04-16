@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Engineering Portfolio</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #121212; color: white; margin: 0; padding: 20px; }
+        h1 { text-align: center; margin-bottom: 40px; }
+        
+        /* This creates the Grid layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s;
+            text-decoration: none;
+            color: white;
+        }
+
+        .project-card:hover { transform: scale(1.05); }
+
+        /* Makes videos/GIFs fit perfectly */
+        .project-media {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-info { padding: 15px; }
+        .project-title { margin: 0 0 10px 0; font-size: 1.2em; color: #4DA8DA; }
+        .project-desc { margin: 0; font-size: 0.9em; color: #aaa; }
+    </style>
+</head>
+<body>
+
+    <h1>Project Showcase</h1>
+
+    <div class="grid-container">
+        
+        <!-- Project 1 -->
+        <a href="LINK_TO_YOUR_GITHUB_REPO" class="project-card">
+            <!-- PRO TIP: Use autoplaying video instead of GIF for better performance -->
+            <video class="project-media" autoplay loop muted playsinline>
+                <source src="pendulum.mp4" type="video/mp4">
+            </video>
+            <div class="project-info">
+                <h2 class="project-title">Inverted Pendulum</h2>
+                <p class="project-desc">LQR control implementation to stabilize a pendulum on a cart.</p>
+            </div>
+        </a>
+
+        <!-- Project 2 -->
+        <a href="LINK_TO_YOUR_GITHUB_REPO" class="project-card">
+            <img class="project-media" src="simulation.gif" alt="Simulation">
+            <div class="project-info">
+                <h2 class="project-title">Robotic Arm Path Planning</h2>
+                <p class="project-desc">A* algorithm used for obstacle avoidance.</p>
+            </div>
+        </a>
+
+        <!-- Add more project cards here -->
+
+    </div>
+
+</body>
+</html>
