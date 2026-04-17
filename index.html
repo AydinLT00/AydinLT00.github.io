@@ -7,6 +7,11 @@
     <!-- Importing a modern font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* CRITICAL FIX: Ensures padding doesn't push elements wider than the screen */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         :root {
             --bg-color: #0f1115;
             --card-bg: #1a1d24;
@@ -24,6 +29,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            overflow-x: hidden; /* Prevents accidental horizontal scrolling */
         }
 
         /* Hero / Header Section */
@@ -36,6 +42,7 @@
             background: linear-gradient(180deg, #161b22 0%, var(--bg-color) 100%);
             border-bottom: 1px solid #2d3139;
             margin-bottom: 40px;
+            width: 100%;
         }
 
         /* Profile Picture Styling */
@@ -67,16 +74,18 @@
         /* Button Container */
         .action-buttons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             margin-top: 25px;
             flex-wrap: wrap;
             justify-content: center;
+            width: 100%;
         }
 
         /* General Button Styling */
         .btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
             color: white;
             text-decoration: none;
@@ -94,7 +103,7 @@
 
         /* Specific Button Colors */
         .btn-cv {
-            background-color: var(--accent); /* Bright Blue */
+            background-color: var(--accent); 
             box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
         }
         .btn-cv:hover { background-color: #2563eb; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4); }
@@ -118,12 +127,14 @@
         /* Grid Layout */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            /* CRITICAL FIX: min(100%, 280px) guarantees it shrinks on narrow phones */
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
             gap: 25px;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px 60px;
-            flex-grow: 1; /* Pushes footer to bottom */
+            flex-grow: 1;
         }
 
         /* Card Styling */
@@ -137,6 +148,7 @@
             color: var(--text-main);
             display: flex;
             flex-direction: column;
+            width: 100%; /* Ensures it stays inside grid bounds */
         }
 
         .project-card:hover { 
@@ -214,6 +226,31 @@
             font-size: 0.9rem;
             background-color: #161b22;
         }
+
+        /* =========================================
+           MOBILE OPTIMIZATION (Phones & Tablets)
+           ========================================= */
+        @media (max-width: 600px) {
+            header {
+                padding: 40px 15px 30px; /* Reduce padding to save space on small screens */
+            }
+            h1 {
+                font-size: 2rem; /* Slightly smaller text for phones */
+            }
+            .grid-container {
+                padding: 0 15px 40px; /* Align grid padding with header */
+                gap: 15px; /* Tighter gap between cards on mobile */
+            }
+            .btn {
+                width: calc(50% - 6px); /* Make buttons stack nicely side-by-side on mobile */
+                font-size: 0.85rem;
+                padding: 10px 15px;
+            }
+            /* Make the main let's get in touch button take full width */
+            .btn-email {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -222,12 +259,10 @@
         <img src="PIE_0589.JPG" alt="Aidin's Profile Picture" class="profile-pic">
         
         <h1>Engineering Projects Showcase</h1>
-        <!-- Tip: You can expand this to include your current studies at Polimi! -->
         <p class="subtitle">A collection of my work in robotics, control systems, simulation, and hardware design. Click on any card to view the source code.</p>
         
         <div class="action-buttons">
             <!-- CV Button -->
-            <!-- Make sure to upload your PDF to GitHub and rename it to match this link -->
             <a href="Aidin_Latifi_CV.pdf" download="Aidin_Latifi_CV.pdf" class="btn btn-cv">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -413,9 +448,8 @@
 
     </div>
 
-    <!-- The newly added Footer -->
     <footer>
-        <p>&copy; 2026 Aidin Latifi. Engineered with precision.</p>
+        <p>&copy; 2024 Aidin Latifi. Engineered with precision.</p>
     </footer>
 
 </body>
