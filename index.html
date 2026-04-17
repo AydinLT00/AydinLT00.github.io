@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aidin's Engineering Portfolio</title>
+    <title>Aydin's Engineering Portfolio</title>
     <!-- Importing a modern font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -25,11 +25,25 @@
 
         /* Hero / Header Section */
         header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
             padding: 60px 20px 40px;
             background: linear-gradient(180deg, #161b22 0%, var(--bg-color) 100%);
             border-bottom: 1px solid #2d3139;
             margin-bottom: 40px;
+        }
+
+        /* Profile Picture Styling */
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+            margin-bottom: 20px;
         }
 
         h1 { 
@@ -44,9 +58,29 @@
             font-size: 1.1rem;
             margin-top: 10px;
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
             line-height: 1.5;
+        }
+
+        /* LinkedIn Button Styling */
+        .linkedin-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #0a66c2; /* Official LinkedIn Blue */
+            color: white;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .linkedin-btn:hover {
+            background-color: #004182;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(10, 102, 194, 0.3);
         }
 
         /* Grid Layout */
@@ -78,7 +112,7 @@
             box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
         }
 
-        /* Media (Video/Image) Setup */
+        /* Media Setup */
         .media-container {
             width: 100%;
             height: 220px;
@@ -90,7 +124,7 @@
         .project-media {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Change to 'contain' if you don't want the edges cropped */
+            object-fit: cover;
             transition: opacity 0.3s ease;
         }
 
@@ -142,8 +176,20 @@
 <body>
 
     <header>
+        <!-- REPLACE "YOUR_PROFILE_PIC.jpg" WITH YOUR ACTUAL IMAGE FILE NAME -->
+        <img src="YOUR_PROFILE_PIC.jpg" alt="Aydin's Profile Picture" class="profile-pic">
+        
         <h1>Engineering Projects Showcase</h1>
-        <p class="subtitle">A collection of my work in robotics, control systems, simulation, and hardware design. Click on any card to view in more detail.</p>
+        <p class="subtitle">A collection of my work in robotics, control systems, simulation, and hardware design. Click on any card to view the source code.</p>
+        
+        <!-- REPLACE "YOUR_LINKEDIN_URL" WITH YOUR ACTUAL LINKEDIN PROFILE LINK -->
+        <a href="YOUR_LINKEDIN_URL" target="_blank" class="linkedin-btn">
+            <!-- This SVG is the official LinkedIn logo icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+            </svg>
+            Connect on LinkedIn
+        </a>
     </header>
 
     <div class="grid-container">
