@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +7,28 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Instant theme checker (prevents white/black flashing on page load) -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('portfolio-theme');
+            if (savedTheme === 'light' || (!savedTheme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+
     <style>
         *, *::before, *::after {
             box-sizing: border-box;
         }
 
-        :root {
+        /* DARK THEME (Default) */
+        :root, [data-theme="dark"] {
             --bg-color: #0f1115;
+            --nav-bg: rgba(15, 17, 21, 0.85);
             --card-bg: #1a1d24;
             --card-bg-hover: #222730;
             --accent: #3b82f6;
@@ -21,6 +36,39 @@
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
             --border-color: #2d3139;
+            --footer-bg: #161b22;
+            
+            --sub-heading: #60a5fa;
+            --venue-color: #93c5fd;
+            --badge-bg: rgba(34, 197, 94, 0.15);
+            --badge-text: #4ade80;
+            --badge-border: rgba(34, 197, 94, 0.3);
+            --btn-link-bg: rgba(59, 130, 246, 0.1);
+            --btn-link-text: #60a5fa;
+            --btn-link-border: rgba(59, 130, 246, 0.25);
+        }
+
+        /* LIGHT THEME */
+        [data-theme="light"] {
+            --bg-color: #f8fafc;
+            --nav-bg: rgba(255, 255, 255, 0.88);
+            --card-bg: #ffffff;
+            --card-bg-hover: #f1f5f9;
+            --accent: #2563eb;
+            --accent-glow: rgba(37, 99, 235, 0.12);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --footer-bg: #f1f5f9;
+            
+            --sub-heading: #2563eb;
+            --venue-color: #1d4ed8;
+            --badge-bg: rgba(22, 163, 74, 0.12);
+            --badge-text: #15803d;
+            --badge-border: rgba(22, 163, 74, 0.25);
+            --btn-link-bg: rgba(37, 99, 235, 0.08);
+            --btn-link-text: #1d4ed8;
+            --btn-link-border: rgba(37, 99, 235, 0.2);
         }
 
         body { 
@@ -34,6 +82,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* Navigation Bar */
@@ -41,20 +90,26 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(15, 17, 21, 0.85);
+            background: var(--nav-bg);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: center;
-            padding: 14px 20px;
+            padding: 12px 20px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 900px;
+            width: 100%;
         }
 
         .nav-links {
             display: flex;
-            gap: 20px;
-            max-width: 900px;
-            width: 100%;
-            justify-content: center;
+            gap: 12px;
         }
 
         .nav-item {
@@ -68,8 +123,34 @@
         }
 
         .nav-item:hover, .nav-item.active {
-            color: #ffffff;
-            background: rgba(59, 130, 246, 0.15);
+            color: var(--text-main);
+            background: var(--btn-link-bg);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle-btn svg {
+            width: 18px;
+            height: 18px;
         }
 
         /* Container */
@@ -102,23 +183,29 @@
         }
 
         .hero-text h1 {
-            margin: 0 0 8px;
+            margin: 0 0 6px;
             font-size: 2.3rem;
             font-weight: 800;
             letter-spacing: -0.5px;
         }
 
         .hero-text .affiliation {
-            color: #60a5fa;
+            color: var(--sub-heading);
             font-weight: 600;
             font-size: 1.05rem;
-            margin: 0 0 12px;
+            margin: 0 0 4px;
         }
 
-        .hero-text p {
+        .hero-text .location {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0 0 14px;
+        }
+
+        .hero-text .bio {
             color: var(--text-muted);
             margin: 0 0 18px;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         /* Buttons */
@@ -143,13 +230,13 @@
 
         .btn svg { width: 16px; height: 16px; }
         .btn-cv { background-color: var(--accent); }
-        .btn-cv:hover { background-color: #2563eb; transform: translateY(-2px); }
+        .btn-cv:hover { transform: translateY(-2px); filter: brightness(1.1); }
         .btn-linkedin { background-color: #0a66c2; }
         .btn-linkedin:hover { background-color: #004182; transform: translateY(-2px); }
         .btn-github { background-color: #24292e; border: 1px solid #3f4448; }
         .btn-github:hover { background-color: #1b1f23; transform: translateY(-2px); }
-        .btn-email { background-color: transparent; border: 1px solid #4b5563; color: var(--text-main); }
-        .btn-email:hover { border-color: var(--text-main); transform: translateY(-2px); }
+        .btn-email { background-color: transparent; border: 1px solid var(--border-color); color: var(--text-main); }
+        .btn-email:hover { border-color: var(--accent); transform: translateY(-2px); }
 
         /* Section Headings */
         .section-title {
@@ -193,7 +280,7 @@
         .interest-card h3 {
             margin: 0 0 8px;
             font-size: 1.05rem;
-            color: #60a5fa;
+            color: var(--sub-heading);
         }
 
         .interest-card p {
@@ -227,9 +314,9 @@
             letter-spacing: 0.5px;
             padding: 3px 10px;
             border-radius: 12px;
-            background: rgba(34, 197, 94, 0.15);
-            color: #4ade80;
-            border: 1px solid rgba(34, 197, 94, 0.3);
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            border: 1px solid var(--badge-border);
             margin-bottom: 12px;
         }
 
@@ -238,7 +325,7 @@
             font-size: 1.2rem;
             font-weight: 700;
             line-height: 1.4;
-            color: #ffffff;
+            color: var(--text-main);
         }
 
         .pub-authors {
@@ -248,14 +335,14 @@
         }
 
         .pub-authors strong {
-            color: #f3f4f6;
+            color: var(--text-main);
             text-decoration: underline;
             text-underline-offset: 3px;
         }
 
         .pub-venue {
             font-size: 0.9rem;
-            color: #93c5fd;
+            color: var(--venue-color);
             font-style: italic;
             margin-bottom: 14px;
         }
@@ -277,9 +364,9 @@
             font-size: 0.8rem;
             padding: 5px 12px;
             border-radius: 6px;
-            background: rgba(59, 130, 246, 0.1);
-            color: #60a5fa;
-            border: 1px solid rgba(59, 130, 246, 0.25);
+            background: var(--btn-link-bg);
+            color: var(--btn-link-text);
+            border: 1px solid var(--btn-link-border);
             text-decoration: none;
             font-weight: 600;
             transition: all 0.2s ease;
@@ -297,7 +384,8 @@
             border-top: 1px solid var(--border-color);
             color: var(--text-muted);
             font-size: 0.9rem;
-            background-color: #161b22;
+            background-color: var(--footer-bg);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         @media (max-width: 650px) {
@@ -309,11 +397,11 @@
             .action-buttons {
                 justify-content: center;
             }
-            .nav-links {
-                gap: 8px;
+            .nav-container {
+                gap: 10px;
             }
             .nav-item {
-                padding: 6px 10px;
+                padding: 6px 8px;
                 font-size: 0.85rem;
             }
         }
@@ -321,12 +409,19 @@
 </head>
 <body>
 
-    <!-- Shared Navigation -->
+    <!-- Shared Navigation Bar -->
     <nav>
-        <div class="nav-links">
-            <a href="index.html" class="nav-item active">About & Research</a>
-            <a href="projects.html" class="nav-item">Projects Showcase</a>
-            <a href="CVs/AIDIN_LATIFI_CV.pdf" target="_blank" class="nav-item">CV</a>
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="index.html" class="nav-item active">About & Research</a>
+                <a href="projects.html" class="nav-item">Projects Showcase</a>
+                <a href="CVs/AIDIN_LATIFI_CV.pdf" target="_blank" class="nav-item">CV</a>
+            </div>
+
+            <!-- Dark / Light Mode Toggle Button -->
+            <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle theme" title="Toggle Dark/Light Mode">
+                <!-- Icon inserted via JavaScript -->
+            </button>
         </div>
     </nav>
 
@@ -337,7 +432,7 @@
             <img src="PIE_0589.JPG" alt="Aidin Latifi" class="profile-pic">
             <div class="hero-text">
                 <h1>Aidin Latifi</h1>
-                <div class="affiliation"> M.Sc. in Mechanical Engineering (Mechatronics & Robotics)
+                <div class="affiliation">M.Sc. in Mechanical Engineering (Mechatronics & Robotics)</div>
                 <p class="location">Politecnico di Milano Alumnus · Based in Turin, Italy</p>
                 <p class="bio">
                     Mechanical & Robotics graduate specializing in intelligent mechatronics, learning-based & optimal control (MPC, RL, LQR), embodied AI, and CAD-to-robot code generation using geometric deep learning.
@@ -353,18 +448,12 @@
                     <a href="mailto:aidin.latifi.u@gmail.com" class="btn btn-email">Contact</a>
                 </div>
             </div>
-            </div>
         </section>
 
         <!-- Research Interests Section -->
         <section>
             <h2 class="section-title">Research Interests</h2>
             <div class="interests-grid">
-                
-                <!-- <div class="interest-card">
-                    <h3>Geometric Deep Learning on CAD</h3>
-                    <p>Processing native Boundary Representation (B-rep) models directly with Graph Neural Networks (BRepNet), avoiding discretization artifacts from point clouds or meshes.</p>
-                </div> -->
 
                 <div class="interest-card">
                     <h3>Embodied AI & Manipulation</h3>
@@ -414,6 +503,32 @@
     <footer>
         <p>&copy; 2026 Aidin Latifi.</p>
     </footer>
+
+    <!-- Theme Toggle Logic -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        
+        const sunIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+        const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+
+        function updateToggleIcon(theme) {
+            themeToggleBtn.innerHTML = theme === 'light' ? moonIcon : sunIcon;
+        }
+
+        // Set initial icon matching the current theme
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateToggleIcon(currentTheme);
+
+        // Click event listener
+        themeToggleBtn.addEventListener('click', () => {
+            const activeTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = activeTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('portfolio-theme', newTheme);
+            updateToggleIcon(newTheme);
+        });
+    </script>
 
 </body>
 </html>
