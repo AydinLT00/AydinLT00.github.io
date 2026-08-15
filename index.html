@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aidin's Engineering Portfolio</title>
+    <title>Aidin Latifi | Robotics & Research Portfolio</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
-    <!-- Importing a modern font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* CRITICAL FIX: Ensures padding doesn't push elements wider than the screen */
         *, *::before, *::after {
             box-sizing: border-box;
         }
@@ -17,9 +15,12 @@
         :root {
             --bg-color: #0f1115;
             --card-bg: #1a1d24;
+            --card-bg-hover: #222730;
             --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.25);
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
+            --border-color: #2d3139;
         }
 
         body { 
@@ -31,543 +32,383 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            overflow-x: hidden; /* Prevents accidental horizontal scrolling */
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* Hero / Header Section */
-        header {
+        /* Navigation Bar */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 17, 21, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 60px 20px 40px;
-            background: linear-gradient(180deg, #161b22 0%, var(--bg-color) 100%);
-            border-bottom: 1px solid #2d3139;
-            margin-bottom: 40px;
-            width: 100%;
+            justify-content: center;
+            padding: 14px 20px;
         }
 
-        /* Profile Picture Styling */
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            max-width: 900px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .nav-item {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 6px 14px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: #ffffff;
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+            flex-grow: 1;
+        }
+
+        /* Hero / Profile */
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 45px;
+        }
+
         .profile-pic {
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--accent);
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
-            margin-bottom: 20px;
+            box-shadow: 0 6px 25px var(--accent-glow);
+            flex-shrink: 0;
         }
 
-        h1 { 
-            margin: 0; 
-            font-size: 2.5rem; 
+        .hero-text h1 {
+            margin: 0 0 8px;
+            font-size: 2.3rem;
             font-weight: 800;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
         }
 
-        .subtitle {
+        .hero-text .affiliation {
+            color: #60a5fa;
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin: 0 0 12px;
+        }
+
+        .hero-text p {
             color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-top: 10px;
-            max-width: 600px;
-            line-height: 1.5;
+            margin: 0 0 18px;
+            font-size: 1rem;
         }
 
-        /* Button Container */
+        /* Buttons */
         .action-buttons {
             display: flex;
-            gap: 12px;
-            margin-top: 25px;
+            gap: 10px;
             flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
         }
 
-        /* General Button Styling */
         .btn {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 8px;
             color: white;
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 30px;
+            padding: 8px 16px;
+            border-radius: 20px;
             font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
         }
 
-        .btn svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        /* Specific Button Colors */
-        .btn-cv {
-            background-color: var(--accent); 
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
-        }
-        .btn-cv:hover { background-color: #2563eb; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4); }
-
+        .btn svg { width: 16px; height: 16px; }
+        .btn-cv { background-color: var(--accent); }
+        .btn-cv:hover { background-color: #2563eb; transform: translateY(-2px); }
         .btn-linkedin { background-color: #0a66c2; }
-        .btn-linkedin:hover { background-color: #004182; transform: translateY(-2px); box-shadow: 0 8px 15px rgba(10, 102, 194, 0.3); }
-
-        .btn-github {
-            background-color: #24292e;
-            border: 1px solid #3f4448;
-        }
-        .btn-github:hover { background-color: #1b1f23; transform: translateY(-2px); border-color: #6a737d; }
-
-        .btn-email {
-            background-color: transparent;
-            border: 2px solid #4b5563;
-            color: var(--text-main);
-        }
+        .btn-linkedin:hover { background-color: #004182; transform: translateY(-2px); }
+        .btn-github { background-color: #24292e; border: 1px solid #3f4448; }
+        .btn-github:hover { background-color: #1b1f23; transform: translateY(-2px); }
+        .btn-email { background-color: transparent; border: 1px solid #4b5563; color: var(--text-main); }
         .btn-email:hover { border-color: var(--text-main); transform: translateY(-2px); }
 
-        /* Grid Layout */
-        .grid-container {
+        /* Section Headings */
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        /* Research Interests Grid */
+        .interests-grid {
             display: grid;
-            /* CRITICAL FIX: min(100%, 280px) guarantees it shrinks on narrow phones */
-            grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
-            gap: 25px;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px 60px;
-            flex-grow: 1;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 50px;
         }
 
-        /* Card Styling */
-        .project-card {
-            background-color: var(--card-bg);
+        .interest-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
-            border: 1px solid #2d3139;
-            overflow: hidden;
+            padding: 20px;
             transition: all 0.3s ease;
-            text-decoration: none;
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            width: 100%; /* Ensures it stays inside grid bounds */
         }
 
-        .project-card:hover { 
-            transform: translateY(-5px); 
+        .interest-card:hover {
             border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--accent-glow);
         }
 
-        /* Media Setup */
-        .media-container {
-            width: 100%;
-            height: 220px;
-            overflow: hidden;
-            background-color: #000;
-            position: relative;
-        }
-
-        .project-media {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-card:hover .project-media {
-            opacity: 0.9;
-        }
-
-        /* Text & Info Setup */
-        .project-info { 
-            padding: 20px; 
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .project-title { 
-            margin: 0 0 10px 0; 
-            font-size: 1.25rem; 
-            font-weight: 600;
-        }
-
-        .project-desc { 
-            margin: 0 0 15px 0; 
-            font-size: 0.9rem; 
-            color: var(--text-muted); 
-            line-height: 1.5;
-            flex-grow: 1;
-        }
-
-        /* Tech Stack Tags */
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: auto;
-        }
-
-        .tag {
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 20px;
-            background-color: rgba(59, 130, 246, 0.1);
+        .interest-card h3 {
+            margin: 0 0 8px;
+            font-size: 1.05rem;
             color: #60a5fa;
+        }
+
+        .interest-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Publication Card */
+        .publication-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .publication-card:hover {
+            background: var(--card-bg-hover);
+            box-shadow: 0 8px 25px var(--accent-glow);
+        }
+
+        .pub-status {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 3px 10px;
+            border-radius: 12px;
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            margin-bottom: 12px;
+        }
+
+        .pub-title {
+            margin: 0 0 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.4;
+            color: #ffffff;
+        }
+
+        .pub-authors {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .pub-authors strong {
+            color: #f3f4f6;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .pub-venue {
+            font-size: 0.9rem;
+            color: #93c5fd;
+            font-style: italic;
+            margin-bottom: 14px;
+        }
+
+        .pub-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .pub-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .pub-link-btn {
+            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 6px;
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            text-decoration: none;
             font-weight: 600;
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .pub-link-btn:hover {
+            background: var(--accent);
+            color: #ffffff;
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 30px 20px;
-            border-top: 1px solid #2d3139;
+            border-top: 1px solid var(--border-color);
             color: var(--text-muted);
             font-size: 0.9rem;
             background-color: #161b22;
         }
 
-        /* =========================================
-           MOBILE OPTIMIZATION (Phones & Tablets)
-           ========================================= */
-        @media (max-width: 600px) {
-            header {
-                padding: 40px 15px 30px; /* Reduce padding to save space on small screens */
+        @media (max-width: 650px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
             }
-            h1 {
-                font-size: 2rem; /* Slightly smaller text for phones */
+            .action-buttons {
+                justify-content: center;
             }
-            .grid-container {
-                padding: 0 15px 40px; /* Align grid padding with header */
-                gap: 15px; /* Tighter gap between cards on mobile */
+            .nav-links {
+                gap: 8px;
             }
-            .btn {
-                width: calc(50% - 6px); /* Make buttons stack nicely side-by-side on mobile */
+            .nav-item {
+                padding: 6px 10px;
                 font-size: 0.85rem;
-                padding: 10px 15px;
-            }
-            /* Make the main let's get in touch button take full width */
-            .btn-email {
-                width: 100%;
             }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <img src="PIE_0589.JPG" alt="Aidin's Profile Picture" class="profile-pic">
-        
-        <h1>Engineering Projects Showcase</h1>
-        <p class="subtitle">A collection of my work in robotics, control systems, simulation, and hardware design. Click on any card to view the source code.</p>
-        
-        <div class="action-buttons">
-            <!-- CV Button -->
-            <a href="CVs/AIDIN_LATIFI_CV.pdf" download="Aidin_Latifi_CV.pdf" class="btn btn-cv">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="7 10 12 15 17 10"></polyline>
-                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
-                Download CV
-            </a>
-
-            <!-- LinkedIn Button -->
-            <a href="https://www.linkedin.com/in/aidin-latifi/" target="_blank" class="btn btn-linkedin">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
-                </svg>
-                LinkedIn
-            </a>
-
-            <!-- Main GitHub Profile Button -->
-            <a href="https://github.com/AydinLT00" target="_blank" class="btn btn-github">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-                </svg>
-                GitHub
-            </a>
-
-            <!-- Email Button -->
-            <a href="mailto:aidin.latifi@mail.polimi.it" class="btn btn-email">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-                Let's get in touch
-            </a>
+    <!-- Shared Navigation -->
+    <nav>
+        <div class="nav-links">
+            <a href="index.html" class="nav-item active">About & Research</a>
+            <a href="projects.html" class="nav-item">Projects Showcase</a>
+            <a href="CVs/AIDIN_LATIFI_CV.pdf" target="_blank" class="nav-item">CV</a>
         </div>
-    </header>
+    </nav>
 
-    <div class="grid-container">
-
-
-
-        <!-- Project: Wheel-Inertial Odometry via EKF -->
-        <a href="https://github.com/AydinLT00/ROS2_turtlesim_playground/tree/main/src/tugbot_localization" class="project-card" target="_blank">
-            <div class="media-container">
-                <img class="project-media" src="https://github.com/AydinLT00/ROS2_turtlesim_playground/releases/download/WIO/WIO.gif" alt="Wheel-Inertial Odometry Simulation">
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">Wheel-Inertial Odometry (EKF)</h2>
-                <p class="project-desc">Custom C++ Extended Kalman Filter (EKF) fusing IMU yaw and wheel odometry to drift-compensate a differential drive robot in GNSS-denied Gazebo Harmonic environments.</p>
-                <div class="tags">
-                    <span class="tag">ROS 2</span>
-                    <span class="tag">C++ / Eigen</span>
-                    <span class="tag">EKF</span>
-                    <span class="tag">Gazebo Harmonic</span>
-                </div>
-            </div>
-        </a>
-
+    <div class="container">
         
-        
-        <!-- Project 1 -->
-        <a href="https://github.com/AydinLT00/Inverted-Pendulum-HIL-Control-SysID/tree/main" class="project-card" target="_blank">
-            <!-- <div class="media-container">
-                <video class="project-media" autoplay loop muted playsinline>
-                    <source src="SMC_test_video.mp4" type="video/mp4">
-                </video> -->
-            <div class="media-container">
-                <img class="project-media" src="https://github.com/AydinLT00/Inverted-Pendulum-HIL-Control-SysID/releases/download/smc_high/SMC_github_high.gif" alt="Simulation">
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">Real-Time Control of an Inverted Pendulum</h2>
-                <p class="project-desc">Rapid Control Prototyping (RCP) control and system identification, featuring LQR, Sliding Mode Control (SMC) as well as Kalman Filter implementations.</p>
-                <div class="tags">
-                    <span class="tag">Control Theory</span>
-                    <span class="tag">MATLAB</span>
-                    <span class="tag">MIL</span>
-                    <span class="tag">SIL</span>
+        <!-- Hero Section -->
+        <section class="hero">
+            <img src="PIE_0589.JPG" alt="Aidin Latifi" class="profile-pic">
+            <div class="hero-text">
+                <h1>Aidin Latifi</h1>
+                <p class="affiliation">Politecnico di Milano · Department of Electronics, Information and Bioengineering (DEIB)</p>
+                <p>Robotics & automation researcher and engineer working at the intersection of geometric deep learning, autonomous robot code generation (CAD-to-code), optimal control, and state estimation.</p>
+                
+                <div class="action-buttons">
+                    <a href="CVs/AIDIN_LATIFI_CV.pdf" download="Aidin_Latifi_CV.pdf" class="btn btn-cv">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        Download CV
+                    </a>
+                    <a href="https://www.linkedin.com/in/aidin-latifi/" target="_blank" class="btn btn-linkedin">LinkedIn</a>
+                    <a href="https://github.com/AydinLT00" target="_blank" class="btn btn-github">GitHub</a>
+                    <a href="mailto:aidin.latifi@mail.polimi.it" class="btn btn-email">Contact</a>
                 </div>
             </div>
-        </a>
+        </section>
 
+        <!-- Research Interests Section -->
+        <section>
+            <h2 class="section-title">Research Interests</h2>
+            <div class="interests-grid">
+                
+                <div class="interest-card">
+                    <h3>Geometric Deep Learning on CAD</h3>
+                    <p>Processing native Boundary Representation (B-rep) models directly with Graph Neural Networks (BRepNet), avoiding discretization artifacts from point clouds or meshes.</p>
+                </div>
 
-        
+                <div class="interest-card">
+                    <h3>Autonomous Robot Code Generation</h3>
+                    <p>Formulating CAD-to-robot program synthesis as geometry-to-sequence translation via multi-modal Transformers, coupled with deterministic CAD-constrained post-processing.</p>
+                </div>
 
+                <div class="interest-card">
+                    <h3>Optimal Control & Locomotion</h3>
+                    <p>Convex Model Predictive Control (MPC), Sliding Mode Control (SMC), and GPU-accelerated reinforcement learning (PPO) for quadrupedal and robotic systems.</p>
+                </div>
 
-        <!-- Project: Go1 Locomotion Playground -->
-        <a href="https://github.com/AydinLT00/go1-locomotion-playground" class="project-card" target="_blank">
-            <div class="media-container">
-                <video class="project-media" autoplay loop muted playsinline>
-                    <!-- <source src="https://github.com/user-attachments/assets/2eceb027-0c00-480c-a1cd-b98b71b83f70" type="video/mp4"> -->
-                    <source src="https://github.com/user-attachments/assets/70c4f661-5da0-4f8b-9669-ded29c901ed6" type="video/mp4">
-                </video>
+                <div class="interest-card">
+                    <h3>State Estimation & Sensor Fusion</h3>
+                    <p>Extended Kalman Filtering (EKF), Wheel-Inertial Odometry (WIO), and multi-sensor fusion for robotics operating in GNSS-denied environments.</p>
+                </div>
+
             </div>
-            <div class="project-info">
-                <h2 class="project-title">
-                    Quadrupedal Velocity Tracking Control in MuJoCo
-                    <span style="font-size: 0.75rem; vertical-align: middle; padding: 2px 8px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); margin-left: 8px;">Ongoing</span>
-                </h2>
-                <p class="project-desc">Implemented a Go1 quadruped simulation in MuJoCo by integrating a QP-based convex MPC with Raibert touchdown heuristics for interactive 3D velocity tracking.</p>
-                <div class="tags">
-                    <span class="tag">MPC</span>
-                    <span class="tag">Raibert</span>
-                    <span class="tag">MuJoCo</span>
+        </section>
+
+        <!-- Publications Section -->
+        <section>
+            <h2 class="section-title">Publications</h2>
+
+            <div class="publication-card">
+                <span class="pub-status">Accepted / Forthcoming (2026)</span>
+                <h3 class="pub-title">An Automated Deep Learning Pipeline for Robot Code Generation from CAD Models</h3>
+                <div class="pub-authors">
+                    Giovanni Indino, <strong>Aidin Latifi</strong>, Marco Faroni, Andrea Maria Zanchettin, Paolo Rocco
+                </div>
+                <div class="pub-venue">
+                    8th International Conference on Industry of the Future and Smart Manufacturing (Procedia Computer Science, Elsevier)
+                </div>
+                <p class="pub-desc">
+                    Presents an end-to-end deep learning pipeline translating native B-rep CAD files directly into executable manufacturing robot instructions. It combines an adapted BRepNet graph neural network for edge feature extraction with a multi-modal encoder-decoder transformer and a deterministic "Snapper" post-processor to achieve sub-millimeter precision on industrial laser-cutting workflows.
+                </p>
+                <div class="pub-links">
+                    <a href="#" class="pub-link-btn">Conference Page</a>
+                    <a href="https://doi.org/10.1016/j.procs.2026.00.000" target="_blank" class="pub-link-btn">Procedia Computer Science</a>
+                    <a href="https://github.com/AydinLT00" target="_blank" class="pub-link-btn">Code Repository</a>
                 </div>
             </div>
-        </a>
 
-        
-        
-
-        <!-- Project 3 -->
-        <a href="https://github.com/AydinLT00/LLM-Vision-Robotic-Chess-Player" class="project-card" target="_blank">
-            <div class="media-container">
-                <img class="project-media" src="Italian-opening.gif" alt="Simulation">
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">LLM Vision Robotic Chess</h2>
-                <p class="project-desc">Integration of Large Language Models and Computer Vision to automate a robotic arm for playing chess autonomously.</p>
-                <div class="tags">
-                    <span class="tag">LLM</span>
-                    <span class="tag">Computer Vision</span>
-                    <span class="tag">Robotics</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- Project 4 -->
-        <a href="https://github.com/AydinLT00/Soft-Robotic-Gripper" class="project-card" target="_blank">
-            <div class="media-container">
-                <img class="project-media" src="Assem_V02_2.gif" alt="Simulation">
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">Soft Robotic Gripper CAD</h2>
-                <p class="project-desc">Complete mechanical and CAD design of a pneumatically actuated soft robotic end-effector.</p>
-                <div class="tags">
-                    <span class="tag">CAD</span>
-                    <span class="tag">Mechanical Design</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- Project 5 -->
-        <a href="https://github.com/AydinLT00/Soft-Robotic-Gripper" class="project-card" target="_blank">
-            <div class="media-container">
-                <img class="project-media" src="full_demostration.gif" alt="Simulation">
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">Soft Gripper Demonstration</h2>
-                <p class="project-desc">Physical hardware demonstration and testing of the fabricated soft robotic gripper adapting to various object shapes.</p>
-                <div class="tags">
-                    <span class="tag">Hardware</span>
-                    <span class="tag">Soft Robotics</span>
-                </div>
-            </div>
-        </a>
-
-
-        <!-- Project 2 -->
-        <a href="https://github.com/AydinLT00/RL-AMS-sorting" class="project-card" target="_blank">
-            <div class="media-container">
-                <img class="project-media" src="animation4.gif" alt="Simulation">
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">RL-AMS Sorting</h2>
-                <p class="project-desc">Reinforcement Learning applied to Automated Manufacturing Systems for optimized and efficient sorting processes.</p>
-                <div class="tags">
-                    <span class="tag">Reinforcement Learning</span>
-                    <span class="tag">Python</span>
-                </div>
-            </div>
-        </a>
-        
-        <!-- Project 6 -->
-        <a href="https://github.com/AydinLT00/IsaacSim_ROS2_HelloWorld" class="project-card" target="_blank">
-            <div class="media-container">
-                <img class="project-media" src="https://github.com/AydinLT00/IsaacSim_ROS2_HelloWorld/releases/download/release_demo/demo.gif" alt="Simulation">
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">Custom Rover in Isaac Sim</h2>
-                <p class="project-desc">Custom differential drive rover integrated with LiDAR sensors, simulated in NVIDIA Isaac Sim and visualized in ROS2 RViz.</p>
-                <div class="tags">
-                    <span class="tag">ROS2</span>
-                    <span class="tag">Isaac Sim</span>
-                    <span class="tag">RViz</span>
-                </div>
-            </div>
-        </a>
-
-        
-        <!-- Project: Go1 Locomotion Playground -->
-        <a href="https://github.com/AydinLT00/go1-locomotion-playground" class="project-card" target="_blank">
-            <div class="media-container">
-                <video class="project-media" autoplay loop muted playsinline>
-                    <source src="https://github.com/user-attachments/assets/2eceb027-0c00-480c-a1cd-b98b71b83f70" type="video/mp4">
-                    <!-- <source src="https://github.com/user-attachments/assets/70c4f661-5da0-4f8b-9669-ded29c901ed6" type="video/mp4"> -->
-                </video>
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">
-                    Go1 GPU Locomotion
-                    <span style="font-size: 0.75rem; vertical-align: middle; padding: 2px 8px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); margin-left: 8px;">Ongoing</span>
-                </h2>
-                <p class="project-desc">GPU-parallelized MuJoCo environment training a Unitree Go1 quadruped via PPO. Leverages NVIDIA Warp and CUDA Graphs for zero-copy state estimation and low-latency physics stepping across 2048 parallel agents.</p>
-                <div class="tags">
-                    <span class="tag">Reinforcement Learning</span>
-                    <span class="tag">NVIDIA Warp</span>
-                    <span class="tag">MuJoCo</span>
-                    <span class="tag">CUDA Graphs</span>
-                </div>
-            </div>
-        </a>
-        <!-- Project 7 -->
-        <a href="https://github.com/AydinLT00/MOR-Damage-Propagation-in-U-Bolts" class="project-card" target="_blank">
-            <div class="media-container">
-                <img class="project-media" src="animation.gif" alt="Simulation">
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">MOR Damage Propagation</h2>
-                <p class="project-desc">Model Order Reduction (MOR) techniques applied to simulate and analyze structural damage propagation in U-Bolts.</p>
-                <div class="tags">
-                    <span class="tag">FEA</span>
-                    <span class="tag">Simulation</span>
-                    <span class="tag">MOR</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- Project 8 -->
-        <a href="https://github.com/AydinLT00" class="project-card" target="_blank">
-            <div class="media-container">
-                <video class="project-media" autoplay loop muted playsinline>
-                    <source src="SCARA_Final2.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">4DOF SCARA CAD Design</h2>
-                <p class="project-desc">Complete CAD modeling and mechanical assembly mapping for a custom 4-Degrees-of-Freedom SCARA robotic arm.</p>
-                <div class="tags">
-                    <span class="tag">CAD</span>
-                    <span class="tag">Kinematics</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- Project 9 -->
-        <a href="https://github.com/AydinLT00" class="project-card" target="_blank">
-            <div class="media-container">
-                <video class="project-media" autoplay loop muted playsinline>
-                    <source src="media1.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">SCARA Simulink Simulation</h2>
-                <p class="project-desc">Kinematic and dynamic modeling of the custom 4DOF SCARA robot tested within a MATLAB/Simulink environment.</p>
-                <div class="tags">
-                    <span class="tag">MATLAB/Simulink</span>
-                    <span class="tag">Dynamics</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- Project 10 -->
-        <a href="https://github.com/AydinLT00/ROS2_projects/tree/main/proj_3" class="project-card" target="_blank">
-            <div class="media-container">
-                <img class="project-media" src="https://github.com/AydinLT00/ROS2_projects/releases/download/limo_ros_slam/limo_ros_slam_v1.gif" alt="Simulation">
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">Teleoperated SLAM in Isaac Sim</h2>
-                <p class="project-desc">Integration of NVIDIA Isaac Sim and ROS 2 Jazzy. Configured TF trees and Action Graphs to perform real-time SLAM with an AgileX Limo and Lidar sensor.</p>
-                <div class="tags">
-                    <span class="tag">ROS 2 Jazzy</span>
-                    <span class="tag">Isaac Sim</span>
-                    <span class="tag">SLAM</span>
-                    <span class="tag">OmniGraph</span>
-                </div>
-            </div>
-        </a>
-
-        <!-- Project 10 -->
-        <!-- Project 8 -->
-        <a href="https://github.com/AydinLT00/panda-playground" class="project-card" target="_blank">
-            <div class="media-container">
-                <video class="project-media" autoplay loop muted playsinline>
-                    <source src="https://github.com/user-attachments/assets/2a4b41b1-2ed5-4ce7-91a0-6500c9774349" type="video/mp4">
-                </video>
-            </div>
-            <div class="project-info">
-                <h2 class="project-title">Franka Panda Simulation
-                <span style="font-size: 0.75rem; vertical-align: middle; padding: 2px 8px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); margin-left: 8px;">Ongoing</span>
-                </h2>
-                <p class="project-desc">End-to-End Reinforcment Learning to perform Inverse Kinematic without Hardcoded script.</p>
-                <div class="tags">
-                    <span class="tag">Mujoco</span>
-                    <span class="tag">RL</span>
-                    <span class="tag">Python</span>
-                </div>
-            </div>
-        </a>
+        </section>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 Aidin Latifi.</p>
-        <a href="https://www.flaticon.com/free-icons/robot" title="robot icons">Robot icon created by shmai - Flaticon</a>
+        <p>&copy; 2026 Aidin Latifi · Politecnico di Milano.</p>
     </footer>
 
 </body>
