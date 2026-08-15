@@ -14,12 +14,26 @@
             box-sizing: border-box;
         }
 
-        :root {
+        :root, [data-theme="dark"] {
             --bg-color: #0f1115;
+            --nav-bg: rgba(15, 17, 21, 0.88);
             --card-bg: #1a1d24;
             --accent: #3b82f6;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
+            --border-color: #2d3139;
+            --footer-bg: #161b22;
+        }
+    
+        [data-theme="light"] {
+            --bg-color: #f8fafc;
+            --nav-bg: rgba(255, 255, 255, 0.88);
+            --card-bg: #ffffff;
+            --accent: #2563eb;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --footer-bg: #f1f5f9;
         }
 
         body { 
