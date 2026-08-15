@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-
+    <!-- 1. Instant theme detection script (prevents screen flashing) -->
     <script>
         (function() {
             const savedTheme = localStorage.getItem('portfolio-theme');
@@ -15,37 +15,52 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aidin's Engineering Portfolio</title>
+    <title>Aidin Latifi | Engineering Projects Showcase</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
-    <!-- Importing a modern font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* CRITICAL FIX: Ensures padding doesn't push elements wider than the screen */
         *, *::before, *::after {
             box-sizing: border-box;
         }
 
+        /* DARK THEME (Default) */
         :root, [data-theme="dark"] {
             --bg-color: #0f1115;
-            --nav-bg: rgba(15, 17, 21, 0.88);
+            --nav-bg: rgba(15, 17, 21, 0.85);
+            --header-gradient: linear-gradient(180deg, #161b22 0%, #0f1115 100%);
             --card-bg: #1a1d24;
+            --card-bg-hover: #222730;
             --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.25);
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
             --border-color: #2d3139;
             --footer-bg: #161b22;
+            --tag-bg: rgba(59, 130, 246, 0.1);
+            --tag-text: #60a5fa;
+            --tag-border: rgba(59, 130, 246, 0.2);
+            --nav-link-hover-bg: rgba(59, 130, 246, 0.15);
         }
-    
+
+        /* LIGHT THEME */
         [data-theme="light"] {
             --bg-color: #f8fafc;
             --nav-bg: rgba(255, 255, 255, 0.88);
+            --header-gradient: linear-gradient(180deg, #e2e8f0 0%, #f8fafc 100%);
             --card-bg: #ffffff;
+            --card-bg-hover: #f1f5f9;
             --accent: #2563eb;
+            --accent-glow: rgba(37, 99, 235, 0.12);
             --text-main: #0f172a;
             --text-muted: #475569;
             --border-color: #e2e8f0;
             --footer-bg: #f1f5f9;
+            --tag-bg: rgba(37, 99, 235, 0.08);
+            --tag-text: #1d4ed8;
+            --tag-border: rgba(37, 99, 235, 0.2);
+            --nav-link-hover-bg: rgba(37, 99, 235, 0.08);
         }
 
         body { 
@@ -57,7 +72,76 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            overflow-x: hidden; /* Prevents accidental horizontal scrolling */
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Top Navigation Bar - Identical to index.html */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            padding: 12px 20px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-item {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 6px 14px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--text-main);
+            background: var(--nav-link-hover-bg);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle-btn svg {
+            width: 18px;
+            height: 18px;
         }
 
         /* Hero / Header Section */
@@ -67,20 +151,20 @@
             align-items: center;
             text-align: center;
             padding: 60px 20px 40px;
-            background: linear-gradient(180deg, #161b22 0%, var(--bg-color) 100%);
-            border-bottom: 1px solid #2d3139;
+            background: var(--header-gradient);
+            border-bottom: 1px solid var(--border-color);
             margin-bottom: 40px;
             width: 100%;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
-        /* Profile Picture Styling */
         .profile-pic {
             width: 120px;
             height: 120px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--accent);
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 20px var(--accent-glow);
             margin-bottom: 20px;
         }
 
@@ -93,13 +177,13 @@
 
         .subtitle {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             margin-top: 10px;
             max-width: 600px;
             line-height: 1.5;
         }
 
-        /* Button Container */
+        /* Action Buttons */
         .action-buttons {
             display: flex;
             gap: 12px;
@@ -109,7 +193,6 @@
             width: 100%;
         }
 
-        /* General Button Styling */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -129,12 +212,11 @@
             height: 18px;
         }
 
-        /* Specific Button Colors */
         .btn-cv {
             background-color: var(--accent); 
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 4px 15px var(--accent-glow);
         }
-        .btn-cv:hover { background-color: #2563eb; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4); }
+        .btn-cv:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
         .btn-linkedin { background-color: #0a66c2; }
         .btn-linkedin:hover { background-color: #004182; transform: translateY(-2px); box-shadow: 0 8px 15px rgba(10, 102, 194, 0.3); }
@@ -147,15 +229,14 @@
 
         .btn-email {
             background-color: transparent;
-            border: 2px solid #4b5563;
+            border: 2px solid var(--border-color);
             color: var(--text-main);
         }
-        .btn-email:hover { border-color: var(--text-main); transform: translateY(-2px); }
+        .btn-email:hover { border-color: var(--accent); transform: translateY(-2px); }
 
         /* Grid Layout */
         .grid-container {
             display: grid;
-            /* CRITICAL FIX: min(100%, 280px) guarantees it shrinks on narrow phones */
             grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
             gap: 25px;
             width: 100%;
@@ -169,23 +250,23 @@
         .project-card {
             background-color: var(--card-bg);
             border-radius: 12px;
-            border: 1px solid #2d3139;
+            border: 1px solid var(--border-color);
             overflow: hidden;
             transition: all 0.3s ease;
             text-decoration: none;
             color: var(--text-main);
             display: flex;
             flex-direction: column;
-            width: 100%; /* Ensures it stays inside grid bounds */
+            width: 100%;
         }
 
         .project-card:hover { 
             transform: translateY(-5px); 
             border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+            box-shadow: 0 10px 30px var(--accent-glow);
+            background-color: var(--card-bg-hover);
         }
 
-        /* Media Setup */
         .media-container {
             width: 100%;
             height: 220px;
@@ -205,7 +286,6 @@
             opacity: 0.9;
         }
 
-        /* Text & Info Setup */
         .project-info { 
             padding: 20px; 
             display: flex;
@@ -217,6 +297,7 @@
             margin: 0 0 10px 0; 
             font-size: 1.25rem; 
             font-weight: 600;
+            color: var(--text-main);
         }
 
         .project-desc { 
@@ -239,61 +320,80 @@
             font-size: 0.75rem;
             padding: 4px 10px;
             border-radius: 20px;
-            background-color: rgba(59, 130, 246, 0.1);
-            color: #60a5fa;
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
             font-weight: 600;
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            border: 1px solid var(--tag-border);
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 30px 20px;
-            border-top: 1px solid #2d3139;
+            border-top: 1px solid var(--border-color);
             color: var(--text-muted);
             font-size: 0.9rem;
-            background-color: #161b22;
+            background-color: var(--footer-bg);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
-        /* =========================================
-           MOBILE OPTIMIZATION (Phones & Tablets)
-           ========================================= */
-        @media (max-width: 600px) {
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 650px) {
             header {
-                padding: 40px 15px 30px; /* Reduce padding to save space on small screens */
+                padding: 40px 15px 30px;
             }
             h1 {
-                font-size: 2rem; /* Slightly smaller text for phones */
+                font-size: 2rem;
             }
             .grid-container {
-                padding: 0 15px 40px; /* Align grid padding with header */
-                gap: 15px; /* Tighter gap between cards on mobile */
+                padding: 0 15px 40px;
+                gap: 15px;
             }
             .btn {
-                width: calc(50% - 6px); /* Make buttons stack nicely side-by-side on mobile */
+                width: calc(50% - 6px);
                 font-size: 0.85rem;
                 padding: 10px 15px;
             }
-            /* Make the main let's get in touch button take full width */
             .btn-email {
                 width: 100%;
+            }
+            .nav-container {
+                gap: 10px;
+            }
+            .nav-item {
+                padding: 6px 8px;
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
 <body>
 
-  <!-- Add this Navigation Bar at the very top of projects.html -->
-    <nav style="position: sticky; top: 0; z-index: 100; background: rgba(15, 17, 21, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #2d3139; display: flex; justify-content: center; padding: 14px 20px;">
-        <div style="display: flex; gap: 20px; max-width: 900px; width: 100%; justify-content: center;">
-            <a href="index.html" style="color: #9ca3af; text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 6px 14px; border-radius: 8px;">About & Research</a>
-            <a href="projects.html" style="color: #ffffff; background: rgba(59, 130, 246, 0.15); text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 6px 14px; border-radius: 8px;">Projects Showcase</a>
-            <a href="CVs/AIDIN_LATIFI_CV.pdf" target="_blank" style="color: #9ca3af; text-decoration: none; font-weight: 600; font-size: 0.95rem; padding: 6px 14px; border-radius: 8px;">CV</a>
+    <!-- Unified Navigation Bar with Theme Toggle -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="index.html" class="nav-item">About & Research</a>
+                <a href="projects.html" class="nav-item active">Projects Showcase</a>
+                <a href="CVs/AIDIN_LATIFI_CV.pdf" target="_blank" class="nav-item">CV</a>
+            </div>
+
+            <!-- Dark / Light Mode Toggle Button -->
+            <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle theme" title="Toggle Dark/Light Mode">
+                <!-- Dynamic SVG icon -->
+            </button>
         </div>
     </nav>
 
     <header>
-        <img src="PIE_0589.JPG" alt="Aidin's Profile Picture" class="profile-pic">
+        <img src="PIE_0589.JPG" alt="Aidin Latifi" class="profile-pic">
         
         <h1>Engineering Projects Showcase</h1>
         <p class="subtitle">A collection of my work in robotics, control systems, simulation, and hardware design. Click on any card to view the source code.</p>
@@ -317,7 +417,7 @@
                 LinkedIn
             </a>
 
-            <!-- Main GitHub Profile Button -->
+            <!-- GitHub Button -->
             <a href="https://github.com/AydinLT00" target="_blank" class="btn btn-github">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
@@ -326,7 +426,7 @@
             </a>
 
             <!-- Email Button -->
-            <a href="mailto:aidin.latifi@mail.polimi.it" class="btn btn-email">
+            <a href="mailto:aidin.latifi.u@gmail.com" class="btn btn-email">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                     <polyline points="22,6 12,13 2,6"></polyline>
@@ -337,8 +437,6 @@
     </header>
 
     <div class="grid-container">
-
-
 
         <!-- Project: Wheel-Inertial Odometry via EKF -->
         <a href="https://github.com/AydinLT00/ROS2_turtlesim_playground/tree/main/src/tugbot_localization" class="project-card" target="_blank">
@@ -357,14 +455,8 @@
             </div>
         </a>
 
-        
-        
-        <!-- Project 1 -->
+        <!-- Project 1: Inverted Pendulum -->
         <a href="https://github.com/AydinLT00/Inverted-Pendulum-HIL-Control-SysID/tree/main" class="project-card" target="_blank">
-            <!-- <div class="media-container">
-                <video class="project-media" autoplay loop muted playsinline>
-                    <source src="SMC_test_video.mp4" type="video/mp4">
-                </video> -->
             <div class="media-container">
                 <img class="project-media" src="https://github.com/AydinLT00/Inverted-Pendulum-HIL-Control-SysID/releases/download/smc_high/SMC_github_high.gif" alt="Simulation">
             </div>
@@ -380,15 +472,10 @@
             </div>
         </a>
 
-
-        
-
-
-        <!-- Project: Go1 Locomotion Playground -->
+        <!-- Project: Go1 Locomotion MPC -->
         <a href="https://github.com/AydinLT00/go1-locomotion-playground" class="project-card" target="_blank">
             <div class="media-container">
                 <video class="project-media" autoplay loop muted playsinline>
-                    <!-- <source src="https://github.com/user-attachments/assets/2eceb027-0c00-480c-a1cd-b98b71b83f70" type="video/mp4"> -->
                     <source src="https://github.com/user-attachments/assets/70c4f661-5da0-4f8b-9669-ded29c901ed6" type="video/mp4">
                 </video>
             </div>
@@ -406,10 +493,7 @@
             </div>
         </a>
 
-        
-        
-
-        <!-- Project 3 -->
+        <!-- Project 3: LLM Chess -->
         <a href="https://github.com/AydinLT00/LLM-Vision-Robotic-Chess-Player" class="project-card" target="_blank">
             <div class="media-container">
                 <img class="project-media" src="Italian-opening.gif" alt="Simulation">
@@ -425,7 +509,7 @@
             </div>
         </a>
 
-        <!-- Project 4 -->
+        <!-- Project 4: Gripper CAD -->
         <a href="https://github.com/AydinLT00/Soft-Robotic-Gripper" class="project-card" target="_blank">
             <div class="media-container">
                 <img class="project-media" src="Assem_V02_2.gif" alt="Simulation">
@@ -440,7 +524,7 @@
             </div>
         </a>
 
-        <!-- Project 5 -->
+        <!-- Project 5: Soft Gripper Hardware -->
         <a href="https://github.com/AydinLT00/Soft-Robotic-Gripper" class="project-card" target="_blank">
             <div class="media-container">
                 <img class="project-media" src="full_demostration.gif" alt="Simulation">
@@ -455,8 +539,7 @@
             </div>
         </a>
 
-
-        <!-- Project 2 -->
+        <!-- Project 2: RL AMS Sorting -->
         <a href="https://github.com/AydinLT00/RL-AMS-sorting" class="project-card" target="_blank">
             <div class="media-container">
                 <img class="project-media" src="animation4.gif" alt="Simulation">
@@ -471,7 +554,7 @@
             </div>
         </a>
         
-        <!-- Project 6 -->
+        <!-- Project 6: Rover in Isaac Sim -->
         <a href="https://github.com/AydinLT00/IsaacSim_ROS2_HelloWorld" class="project-card" target="_blank">
             <div class="media-container">
                 <img class="project-media" src="https://github.com/AydinLT00/IsaacSim_ROS2_HelloWorld/releases/download/release_demo/demo.gif" alt="Simulation">
@@ -487,13 +570,11 @@
             </div>
         </a>
 
-        
-        <!-- Project: Go1 Locomotion Playground -->
+        <!-- Project: Go1 GPU Locomotion -->
         <a href="https://github.com/AydinLT00/go1-locomotion-playground" class="project-card" target="_blank">
             <div class="media-container">
                 <video class="project-media" autoplay loop muted playsinline>
                     <source src="https://github.com/user-attachments/assets/2eceb027-0c00-480c-a1cd-b98b71b83f70" type="video/mp4">
-                    <!-- <source src="https://github.com/user-attachments/assets/70c4f661-5da0-4f8b-9669-ded29c901ed6" type="video/mp4"> -->
                 </video>
             </div>
             <div class="project-info">
@@ -510,7 +591,8 @@
                 </div>
             </div>
         </a>
-        <!-- Project 7 -->
+
+        <!-- Project 7: MOR Damage Propagation -->
         <a href="https://github.com/AydinLT00/MOR-Damage-Propagation-in-U-Bolts" class="project-card" target="_blank">
             <div class="media-container">
                 <img class="project-media" src="animation.gif" alt="Simulation">
@@ -526,7 +608,7 @@
             </div>
         </a>
 
-        <!-- Project 8 -->
+        <!-- Project 8: 4DOF SCARA CAD -->
         <a href="https://github.com/AydinLT00" class="project-card" target="_blank">
             <div class="media-container">
                 <video class="project-media" autoplay loop muted playsinline>
@@ -543,7 +625,7 @@
             </div>
         </a>
 
-        <!-- Project 9 -->
+        <!-- Project 9: SCARA Simulink -->
         <a href="https://github.com/AydinLT00" class="project-card" target="_blank">
             <div class="media-container">
                 <video class="project-media" autoplay loop muted playsinline>
@@ -560,7 +642,7 @@
             </div>
         </a>
 
-        <!-- Project 10 -->
+        <!-- Project 10: Teleoperated SLAM -->
         <a href="https://github.com/AydinLT00/ROS2_projects/tree/main/proj_3" class="project-card" target="_blank">
             <div class="media-container">
                 <img class="project-media" src="https://github.com/AydinLT00/ROS2_projects/releases/download/limo_ros_slam/limo_ros_slam_v1.gif" alt="Simulation">
@@ -577,8 +659,7 @@
             </div>
         </a>
 
-        <!-- Project 10 -->
-        <!-- Project 8 -->
+        <!-- Project 11: Panda RL -->
         <a href="https://github.com/AydinLT00/panda-playground" class="project-card" target="_blank">
             <div class="media-container">
                 <video class="project-media" autoplay loop muted playsinline>
@@ -587,11 +668,11 @@
             </div>
             <div class="project-info">
                 <h2 class="project-title">Franka Panda Simulation
-                <span style="font-size: 0.75rem; vertical-align: middle; padding: 2px 8px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); margin-left: 8px;">Ongoing</span>
+                    <span style="font-size: 0.75rem; vertical-align: middle; padding: 2px 8px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); margin-left: 8px;">Ongoing</span>
                 </h2>
-                <p class="project-desc">End-to-End Reinforcment Learning to perform Inverse Kinematic without Hardcoded script.</p>
+                <p class="project-desc">End-to-End Reinforcement Learning to perform Inverse Kinematics without hardcoded scripts.</p>
                 <div class="tags">
-                    <span class="tag">Mujoco</span>
+                    <span class="tag">MuJoCo</span>
                     <span class="tag">RL</span>
                     <span class="tag">Python</span>
                 </div>
@@ -604,6 +685,32 @@
         <p>&copy; 2026 Aidin Latifi.</p>
         <a href="https://www.flaticon.com/free-icons/robot" title="robot icons">Robot icon created by shmai - Flaticon</a>
     </footer>
+
+    <!-- Theme Toggle JavaScript -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        
+        const sunIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+        const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+
+        function updateToggleIcon(theme) {
+            themeToggleBtn.innerHTML = theme === 'light' ? moonIcon : sunIcon;
+        }
+
+        // Initialize state
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        updateToggleIcon(currentTheme);
+
+        // Click listener
+        themeToggleBtn.addEventListener('click', () => {
+            const activeTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = activeTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('portfolio-theme', newTheme);
+            updateToggleIcon(newTheme);
+        });
+    </script>
 
 </body>
 </html>
